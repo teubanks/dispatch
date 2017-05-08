@@ -36,6 +36,6 @@ func NewEventListener() *EventListener {
 }
 
 func (e *EventListener) onEvent(event *dispatch.Event) {
-	// Perform an action when this is called
+	// Perform an action when this is called by `sd.DispatchEvent(event)`
 }
 ```
