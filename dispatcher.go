@@ -1,4 +1,4 @@
-package event_dispatcher
+package dispatch
 
 import (
 	"fmt"
