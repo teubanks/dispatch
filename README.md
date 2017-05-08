@@ -13,7 +13,7 @@ func emitEvent(obj *Obj) {
 	params := make(map[string]interface{})
 	params["obj"] = *obj
 
-	event := sd.CreateEvent("eventName", params)
+	event := dispatch.CreateEvent("eventName", params)
 	sd.DispatchEvent(event)
 }
 ```
@@ -29,7 +29,7 @@ func NewEventListener() *EventListener {
 	e.eventAction = e.onEvent
 
 	sd := dispatch.SharedDispatcher()
-  // This "eventName" is the same as the one called from `CreateEvent`
+	// This "eventName" is the same as the one called from `CreateEvent`
 	sd.AddEventListener("eventName", &e.eventAction)
 
 	return e
