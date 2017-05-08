@@ -72,11 +72,8 @@ func (d *Dispatcher) AddEventListener(eventName string, callback *EventCallback)
 //    callback then loop around to wait for the next event
 //    to come in
 func (d *Dispatcher) handler(eventName string, ch chan *Event, callback *EventCallback) {
-	//fmt.Printf("add listener: %s\n", eventName)
-	//fmt.Println("chan: ", ch)
 	for {
 		event := <-ch
-		// fmt.Println("event out:", eventName, event, ch)
 		if event == nil {
 			break
 		}
@@ -111,7 +108,6 @@ func (d *Dispatcher) DispatchEvent(event *Event) {
 
 	eventChain, ok := d.listeners[event.eventName]
 	if ok {
-		// fmt.Printf("dispatch event: %s\n", event.eventName)
 		eventChain.sendEventToChs(event)
 	}
 }

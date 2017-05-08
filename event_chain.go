@@ -35,7 +35,6 @@ func (e *EventChain) removeCallback(cb *EventCallback) {
 	for i, item := range e.callbacks {
 		a := *(*int)(unsafe.Pointer(item))
 		b := *(*int)(unsafe.Pointer(cb))
-		// fmt.Println("remove", a, b)
 		if a == b {
 			exist = true
 			ch = e.chs[i]
@@ -45,13 +44,10 @@ func (e *EventChain) removeCallback(cb *EventCallback) {
 	}
 
 	if exist {
-		// fmt.Printf("remove listener: %s\n", eventName)
-		// fmt.Println("chan: ", ch)
 		ch <- nil
 
 		e.chs = append(e.chs[:idx], e.chs[idx+1:]...)
 		e.callbacks = append(e.callbacks[:idx], e.callbacks[idx+1:]...)
-		// fmt.Println(len(eventChain.chs))
 	}
 }
 
@@ -60,11 +56,9 @@ func (e *EventChain) callbackExists(cb *EventCallback) bool {
 	defer e.mutex.Unlock()
 
 	exist := false
-	//fmt.Println("add len:", len(eventChain.callbacks))
 	for _, item := range e.callbacks {
 		a := *(*int)(unsafe.Pointer(item))
 		b := *(*int)(unsafe.Pointer(cb))
-		//fmt.Println("add", a, b)
 		if a == b {
 			exist = true
 			break
